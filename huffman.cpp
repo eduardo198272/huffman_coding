@@ -1,3 +1,8 @@
+/*
+    g++ -o huffman huffman.cpp 
+    ./huffman input.txt  
+*/
+
 #include <iostream>
 #include <fstream>
 #include <unordered_map>
