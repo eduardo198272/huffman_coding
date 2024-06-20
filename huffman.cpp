@@ -44,7 +44,7 @@ unordered_map<wchar_t, int> analyzeText(const wstring& filename) {
         }
     }
 
-    file.close(); 
+    file.close();  
 
     wcout << L"Frequências dos caracteres:\n";
     for (auto& entry : frequencies) {
@@ -52,6 +52,19 @@ unordered_map<wchar_t, int> analyzeText(const wstring& filename) {
     }
 
     return frequencies;
+}
+
+shared_ptr<HuffmanNode> buildHuffmanTree(const unordered_map<wchar_t, int>& frequencies) {
+    priority_queue<shared_ptr<HuffmanNode>, vector<shared_ptr<HuffmanNode>>, CompareNode> minHeap;
+
+    wcout << L"Nós inseridos na min-heap:\n";
+    for (auto pair : frequencies) {
+        auto node = make_shared<HuffmanNode>(pair.first, pair.second);
+        minHeap.push(node);
+        wcout << node->symbol << L" (" << node->frequency << L")\n";
+    }
+
+    return nullptr;  
 }
 
 int main(int argc, char* argv[]) {
@@ -67,6 +80,7 @@ int main(int argc, char* argv[]) {
     delete[] wfilename;
 
     auto frequencies = analyzeText(filename);
+    auto root = buildHuffmanTree(frequencies);
 
     return 0;
 }
